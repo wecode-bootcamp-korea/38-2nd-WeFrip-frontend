@@ -7,10 +7,13 @@ import Login from './pages/Login/Login';
 import Main from './pages/Main/Main';
 import Mypage from './pages/Mypage/Mypage';
 import Wishlist from './pages/Wishlist/Wishlist';
+import Nav from './components/Nav/Nav';
+import Footer from './components/Footer/Footer';
 
 const Router = () => {
   return (
     <BrowserRouter>
+      <Nav />
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/list" element={<List />} />
@@ -20,6 +23,7 @@ const Router = () => {
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/wishlist" element={<Wishlist />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 };
