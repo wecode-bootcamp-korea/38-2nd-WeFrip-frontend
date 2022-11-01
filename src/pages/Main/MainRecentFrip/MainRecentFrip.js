@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Product from '../../../components/Product/Product';
-import variables from '../../../styles/variables';
+import Product from 'components/Product/Product';
 
 const MainRecentFrip = () => {
   const [product, setProduct] = useState([]);
@@ -30,8 +29,8 @@ const MainRecentFrip = () => {
         <ProductSeeAll>전체 보기</ProductSeeAll>
       </ProductTitleBox>
       <ProductListBox>
-        {product?.map(product => (
-          <Product key={product.productId} product={product} />
+        {product?.map(products => (
+          <Product key={products.productId} product={products} />
         ))}
       </ProductListBox>
     </MainRecentFripContainer>
@@ -66,7 +65,7 @@ const ProductSeeAll = styled.p`
 `;
 
 const ProductListBox = styled.div`
-  ${variables.flex('row', 'space-between', 'null')}
+  ${({ theme }) => theme.variables.flex('row', 'space-between', 'null')};
   width: 1200px;
   margin: 0 auto;
 `;
