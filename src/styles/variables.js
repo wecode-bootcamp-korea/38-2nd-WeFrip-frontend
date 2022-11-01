@@ -8,11 +8,30 @@ const variables = {
     align-items: ${align};
   `,
 
-  absoluteCenter: css`
-    position: absolute;
+  position: (position = 'relative', top = '0px', right = '0px') => `
+    position: ${position};
+    top : ${top};
+    right : ${right};
+
+  `,
+
+  positionCenter: (position = 'absolute') => css`
+    position: ${position};
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  `,
+
+  positionX: (position = 'absolute') => css`
+    position: ${position};
+    left: 50%;
+    transform: translateX(-50%);
+  `,
+
+  positionY: (position = 'absolute') => css`
+    position: ${position};
+    top: 50%;
+    transform: translateY(-50%);
   `,
 };
 
