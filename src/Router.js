@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Detail from './pages/Detail/Detail';
+import Products from './pages/Products/Products';
 import Host from './pages/Host/Host';
 import List from './pages/List/List';
 import Login from './pages/Login/Login';
@@ -17,7 +17,8 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/list" element={<List />} />
-        <Route path="/detail" element={<Detail />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/products/:productId" element={<Products />} />
         <Route path="/login" element={<Login />} />
         <Route path="/host" element={<Host />} />
         <Route path="/mypage" element={<Mypage />} />
