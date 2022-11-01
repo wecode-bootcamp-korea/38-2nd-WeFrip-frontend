@@ -3,15 +3,23 @@ import styled from 'styled-components';
 
 const MainSmallBanner = () => {
   return (
-    <MainSmallBannerContainer>메인 작은 배너 위치</MainSmallBannerContainer>
+    <MainSmallBannerContainer>
+      <SmallBannerImg
+        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FdQsMiQ%2FbtrP9eViQTa%2FxSCHKAmli8yMUhaKkoKQ0k%2Fimg.png"
+        alt="배너 사진"
+      />
+    </MainSmallBannerContainer>
   );
 };
 
 const MainSmallBannerContainer = styled.div`
+  margin: 100px 0;
+  width: 100%;
+`;
+
+const SmallBannerImg = styled.img`
   width: 100%;
   height: 200px;
-  border: 2px solid black;
-  margin-top: 100px;
 `;
 
 export default MainSmallBanner;

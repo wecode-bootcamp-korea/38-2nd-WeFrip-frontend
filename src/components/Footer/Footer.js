@@ -63,6 +63,8 @@ const contents = [
 
 const Container = styled.div`
   width: 100%;
+  background-color: ${({ theme }) => theme.style.lightGrey};
+  padding-top: 30px;
 `;
 
 const ContentsBox = styled.div`
