@@ -10,6 +10,7 @@ import Wishlist from './pages/Wishlist/Wishlist';
 import Nav from './components/Nav/Nav';
 import Footer from './components/Footer/Footer';
 import MainLayout from 'pages/MainLayout/MainLayout';
+import KakaoRedirectHandler from './kakao/KakaoRedirectHandler';
 
 const Router = () => {
   return (
@@ -23,6 +24,10 @@ const Router = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/wishlist" element={<Wishlist />} />
+          <Route
+            path="/oauth/callback/kakao"
+            element={<KakaoRedirectHandler />}
+          />
         </Route>
         <Route path="/host" element={<Host />} />
       </Routes>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import {
   BsList,
@@ -10,11 +10,16 @@ import {
 } from 'react-icons/bs';
 
 const Nav = () => {
+  const navigate = useNavigate();
   const dropdownRef = useRef(null);
   const [search, setSearch] = useState('');
   const [menuLists, setMenuLists] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
-
+  const token = localStorage.getItem('token');
+  const removeToken = () => {
+    localStorage.removeItem('token');
+    navigate('/login');
+  };
   useEffect(() => {
     const pageClickEvent = e => {
       if (
@@ -53,9 +58,18 @@ const Nav = () => {
         <GridWrap>
           <Link to="/host">호스트지원</Link>
           <MenuList>
-            <li>
-              <Link to="/login">로그인</Link>
-            </li>
+            {!token ? (
+              <li>
+                <Link to="/login">로그인</Link>
+              </li>
+            ) : (
+              <li>
+                <Link to="/" onClick={removeToken}>
+                  로그아웃
+                </Link>
+              </li>
+            )}
+
             <li>자주묻는질문</li>
             <li>공지사항</li>
           </MenuList>
