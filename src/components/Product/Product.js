@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
+import { AuthApi } from 'lib/api';
+import API from 'config';
 
 const Product = ({ product }) => {
   const navigate = useNavigate();
@@ -15,24 +17,11 @@ const Product = ({ product }) => {
     if (!token) {
       return alert('회원전용 서비스입니다!');
     }
-
-    fetch(``, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        Authorization: token,
-      },
-      body: JSON.stringify({
-        productId: productId,
-      }),
-    })
-      .then(response => {
-        if (response.ok === true) {
-          return response.json();
-        }
-        throw new Error('에러 발생, check status code');
-      })
-      .catch(error => alert(error));
+    try {
+      AuthApi.post(API.wishlist, { productId });
+    } catch (err) {
+      alert(err);
+    }
   };
 
   return (
@@ -42,16 +31,8 @@ const Product = ({ product }) => {
       }}
       variables
     >
-      <ProductImg src={product.thumnail_image_url} alt="상품 사진" />
-      {product.isBookMarked ? (
-        <BsBookmark
-          className="outlinedIcon"
-          onClick={e => {
-            postWishInfo(product.productId);
-            e.stopPropagation();
-          }}
-        />
-      ) : (
+      <ProductImg src={product.thumbnailImageUrl} alt="상품 사진" />
+      {product.isBookmarked ? (
         <BsBookmarkFill
           className="filledIcon"
           onClick={e => {
@@ -59,12 +40,20 @@ const Product = ({ product }) => {
             e.stopPropagation();
           }}
         />
+      ) : (
+        <BsBookmark
+          className="filledIcon"
+          onClick={e => {
+            postWishInfo(product.productId);
+            e.stopPropagation();
+          }}
+        />
       )}
-      <ProductLocation>{product.location}</ProductLocation>
+      <ProductLocation>{product.locationGroupName}</ProductLocation>
       <ProductTitle>
-        {product.title?.length > 40
-          ? product.title.slice(0, 40) + '. . .'
-          : product.title}
+        {product.name?.length > 40
+          ? product.name.slice(0, 40) + '. . .'
+          : product.name}
       </ProductTitle>
       <DevideLine />
       <ProductPrice>{product.price}원</ProductPrice>

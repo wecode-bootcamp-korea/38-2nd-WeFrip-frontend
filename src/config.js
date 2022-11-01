@@ -1,5 +1,6 @@
-const BASE_URL = '';
-
-const API = {};
+const API = {
+  mainFrip: `/products/main`,
+  wishlist: `/wishlists`,
+};
 
 export default API;

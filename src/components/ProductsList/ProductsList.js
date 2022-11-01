@@ -1,43 +1,44 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Product from 'components/Product/Product';
+import API from 'config';
+import { BasicApi } from 'lib/api';
 
-const MainRecentFrip = () => {
-  const [product, setProduct] = useState([]);
+const ProductsList = ({ type }) => {
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch(`/data/RecentFrip.json`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-      },
-    })
-      .then(response => {
-        if (response.ok === true) {
-          return response.json();
-        }
-        throw new Error('에러 발생, check status code');
-      })
-      .then(result => setProduct(result.data.slice(0, 4)))
-      .catch(error => alert(error));
+    (async () => {
+      try {
+        const res = await BasicApi.get(API.mainFrip);
+        const data = await res.data;
+        type === '신규 프립'
+          ? setProducts(JSON.parse(data.data[0].products))
+          : setProducts(JSON.parse(data.data[1].products));
+      } catch (err) {
+        alert(err);
+      }
+    })();
   }, []);
 
   return (
-    <MainRecentFripContainer>
+    <ProductsListContainer>
       <ProductTitleBox>
-        <ProductTitle>신규 프립</ProductTitle>
+        <ProductTitle>
+          {type === '신규 프립' ? '신규 프립' : '여행을 떠나요'}
+        </ProductTitle>
         <ProductSeeAll>전체 보기</ProductSeeAll>
       </ProductTitleBox>
       <ProductListBox>
-        {product?.map(products => (
+        {products?.map(products => (
           <Product key={products.productId} product={products} />
         ))}
       </ProductListBox>
-    </MainRecentFripContainer>
+    </ProductsListContainer>
   );
 };
 
-const MainRecentFripContainer = styled.div`
+const ProductsListContainer = styled.div`
   margin-top: 100px;
   width: 100%;
 `;
@@ -70,4 +71,4 @@ const ProductListBox = styled.div`
   margin: 0 auto;
 `;
 
-export default MainRecentFrip;
+export default ProductsList;
