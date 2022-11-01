@@ -12,7 +12,6 @@ const variables = {
     position: ${position};
     top : ${top};
     right : ${right};
-
   `,
 
   positionCenter: (position = 'absolute') => css`

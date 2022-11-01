@@ -18,7 +18,7 @@ const Main = () => {
 
 const MainContainer = styled.div`
   width: 1200px;
-  padding-top: 100px;
+  padding-top: 150px;
   margin: 0 auto;
 `;
 

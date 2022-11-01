@@ -3,22 +3,15 @@ import styled from 'styled-components';
 import { BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 
-const Product = ({
-  id,
-  imgUrl,
-  location,
-  title,
-  price,
-  discountRate,
-  isBookMarked,
-}) => {
+const Product = ({ product }) => {
   const navigate = useNavigate();
 
   const token = localStorage.getItem('token');
 
-  const discountPrice = price - price * (discountRate / 100);
+  const discountPrice =
+    product.price - product.price * (product.discountRate / 100);
 
-  const postWishInfo = id => {
+  const postWishInfo = productId => {
     if (!token) {
       return alert('회원전용 서비스입니다!');
     }
@@ -30,7 +23,7 @@ const Product = ({
         Authorization: token,
       },
       body: JSON.stringify({
-        productId: id,
+        productId: productId,
       }),
     })
       .then(response => {
@@ -45,15 +38,16 @@ const Product = ({
   return (
     <ProductContainer
       onClick={() => {
-        navigate(`/detail/${id}`);
+        navigate(`/products/${product.productId}`);
       }}
+      variables
     >
-      <ProductImg src={imgUrl} alt="상품 사진" />
-      {isBookMarked ? (
+      <ProductImg src={product.thumnail_image_url} alt="상품 사진" />
+      {product.isBookMarked ? (
         <BsBookmark
           className="outlinedIcon"
           onClick={e => {
-            postWishInfo(id);
+            postWishInfo(product.productId);
             e.stopPropagation();
           }}
         />
@@ -61,19 +55,21 @@ const Product = ({
         <BsBookmarkFill
           className="filledIcon"
           onClick={e => {
-            postWishInfo(id);
+            postWishInfo(product.productId);
             e.stopPropagation();
           }}
         />
       )}
-      <ProductLocation>{location}</ProductLocation>
+      <ProductLocation>{product.location}</ProductLocation>
       <ProductTitle>
-        {title?.length > 35 ? title.slice(0, 35) + '. . .' : title}
+        {product.title?.length > 40
+          ? product.title.slice(0, 40) + '. . .'
+          : product.title}
       </ProductTitle>
       <DevideLine />
-      <ProductPrice>{price}원</ProductPrice>
+      <ProductPrice>{product.price}원</ProductPrice>
       <ProductDicountRate>
-        {discountRate}%
+        {product.discountRate}%
         <ProductDicountPrice>{discountPrice}원</ProductDicountPrice>
       </ProductDicountRate>
     </ProductContainer>
@@ -81,12 +77,12 @@ const Product = ({
 };
 
 const ProductContainer = styled.div`
-  ${({ variables }) => variables.position('relative', null, null)}
-  width: 290px;
+  ${({ theme }) => theme.variables.position('relative', null, null)}
+  width: 260px;
   cursor: pointer;
 
   .outlinedIcon {
-    ${({ variables }) => variables.position('absolute', '240px', '20px')}
+    ${({ theme }) => theme.variables.position('absolute', '210px', '20px')}
     width: 30px;
     height: 30px;
     color: ${({ theme }) => theme.style.white};
@@ -94,7 +90,7 @@ const ProductContainer = styled.div`
   }
 
   .filledIcon {
-    ${({ variables }) => variables.position('absolute', '240px', '20px')}
+    ${({ theme }) => theme.variables.position('absolute', '210px', '20px')}
     width: 30px;
     height: 30px;
     color: ${({ theme }) => theme.style.subPrimaryColor};
@@ -103,12 +99,12 @@ const ProductContainer = styled.div`
 `;
 
 const ProductImg = styled.img`
-  width: 289px;
-  height: 289px;
+  width: 259px;
+  height: 259px;
+  border-radius: 5px;
 `;
 
 const ProductLocation = styled.p`
-  margin: 10px;
   color: ${({ theme }) => theme.style.middleGrey};
   font-size: 14px;
   font-weight: 400;
@@ -116,31 +112,32 @@ const ProductLocation = styled.p`
 `;
 
 const ProductTitle = styled.p`
-  margin: 10px;
-  max-height: 40px;
+  margin-top: 10px;
+  min-height: 44px;
   height: auto;
   font-size: 16px;
   font-weight: 400;
   word-break: keep-all;
   overflow-wrap: break-word;
-  line-height: 20px;
+  line-height: 22px;
 `;
 
-const DevideLine = styled.hr`
-  margin: 10px;
+const DevideLine = styled.div`
+  width: 100%;
+  border-top: 1px solid ${({ theme }) => theme.style.middleGrey};
+  margin: 10px 0;
 `;
 
 const ProductPrice = styled.p`
-  margin: 10px;
-  color: ${({ theme }) => theme.style.disabled};
-  font-size: 12px;
+  color: ${({ theme }) => theme.style.middleGrey};
+  font-size: 13px;
   line-height: 14px;
   letter-spacing: -0.48px;
   text-decoration: line-through;
 `;
 
 const ProductDicountRate = styled.p`
-  margin: 10px;
+  margin-top: 10px;
   color: ${({ theme }) => theme.style.subPrimaryColor};
   font-size: 16px;
   font-weight: 700;
