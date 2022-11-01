@@ -7,6 +7,8 @@ const theme = {
   hoverGrey: '#DBDBDB',
   primaryColor: '#7928F9',
   subPrimaryColor: '#FF3F33',
+
+  fontLogo: "'Exo 2', sans-serif",
 };
 
 export default theme;
