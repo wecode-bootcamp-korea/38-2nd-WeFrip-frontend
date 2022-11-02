@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {
@@ -10,6 +10,43 @@ import {
 } from 'react-icons/bs';
 
 const Nav = () => {
+  const dropdownRef = useRef(null);
+  const [search, setSearch] = useState('');
+  const [menuLists, setMenuLists] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const pageClickEvent = e => {
+      if (
+        dropdownRef.current !== null &&
+        !dropdownRef.current.contains(e.target)
+      ) {
+        setIsOpen(!isOpen);
+      }
+    };
+    if (isOpen) {
+      window.addEventListener('mousedown', pageClickEvent);
+    }
+
+    return () => {
+      window.removeEventListener('mousedown', pageClickEvent);
+    };
+  }, [isOpen]);
+
+  const onChange = event => {
+    event.preventDefault();
+    setSearch(event.target.value);
+  };
+  useEffect(() => {
+    fetch('data/menulist.json', {
+      method: 'GET',
+    })
+      .then(res => res.json())
+      .then(data => {
+        setMenuLists(data);
+      });
+  }, []);
+
   return (
     <NavContainer>
       <NavTop>
@@ -26,12 +63,16 @@ const Nav = () => {
       </NavTop>
       <NavBottom>
         <GridWrap>
-          <BsList className="icon" />
+          <BsList className="icon" onClick={() => setIsOpen(!isOpen)} />
           <Logo>
             <Link to="/">WeFrip</Link>
           </Logo>
           <SearchForm>
-            <InputBox placeholder="어떤 위프립을 찾으시나요?" />
+            <InputBox
+              placeholder="어떤 위프립을 찾으시나요?"
+              onChange={onChange}
+              value={search}
+            />
             <BsSearch className="searchIcon" />
           </SearchForm>
           <MenuIconWrap>
@@ -47,13 +88,25 @@ const Nav = () => {
           </MenuIconWrap>
         </GridWrap>
       </NavBottom>
+      <DropdownMenu ref={dropdownRef} className={isOpen ? 'active' : ''}>
+        <GridWrap>
+          {menuLists.map(list => (
+            <li key={list.id}>
+              <Link to={list.url}>
+                <img src={list.image} alt={list.title} />
+                <p>{list.title}</p>
+              </Link>
+            </li>
+          ))}
+        </GridWrap>
+      </DropdownMenu>
     </NavContainer>
   );
 };
 
 const NavContainer = styled.div`
   width: 100%;
-  border-bottom: 1px solid ${props => props.theme.style.lightGrey};
+  border-bottom: 1px solid ${({ theme }) => theme.style.lightGrey};
   position: fixed;
   top: 0;
   left: 0;
@@ -63,21 +116,22 @@ const NavContainer = styled.div`
   }
 `;
 const NavTop = styled.div`
-  background-color: ${props => props.theme.style.lightGrey};
+  background-color: ${({ theme }) => theme.style.lightGrey};
   padding: 5px 0;
   font-size: 14px;
-  color: ${props => props.theme.style.middleGrey};
+  color: ${({ theme }) => theme.style.middleGrey};
   a {
-    color: ${props => props.theme.style.middleGrey};
+    color: ${({ theme }) => theme.style.middleGrey};
   }
 `;
 
 const GridWrap = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 30px;
 `;
 
 const MenuList = styled.ul`
@@ -96,6 +150,7 @@ const MenuList = styled.ul`
 const NavBottom = styled.div`
   padding: 20px 0;
   background-color: #fff;
+  z-index: 99;
 
   .icon {
     font-size: 22px;
@@ -105,12 +160,12 @@ const NavBottom = styled.div`
 `;
 
 const Logo = styled.div`
-  font-family: ${props => props.theme.style.fontLogo};
+  font-family: ${({ theme }) => theme.style.fontLogo};
   font-size: 30px;
   font-weight: 700;
 
   a {
-    color: ${props => props.theme.style.primaryColor};
+    color: ${({ theme }) => theme.style.primaryColor};
   }
 `;
 
@@ -135,12 +190,12 @@ const InputBox = styled.input`
   height: 35px;
   border-radius: 50px;
   border: none;
-  background-color: ${props => props.theme.style.lightGrey};
+  background-color: ${({ theme }) => theme.style.lightGrey};
   &::placeholder {
-    color: ${props => props.theme.style.middleGrey};
+    color: ${({ theme }) => theme.style.middleGrey};
   }
   &:focus {
-    outline: 1px solid ${props => props.theme.style.primaryColor};
+    outline: 1px solid ${({ theme }) => theme.style.primaryColor};
     background-color: #fff;
   }
 `;
@@ -157,6 +212,58 @@ const MenuIconWrap = styled.div`
   a:last-child .icon {
     margin-right: 0;
     font-size: 26px;
+  }
+`;
+const DropdownMenu = styled.ul`
+  display: flex;
+  position: absolute;
+  width: 100%;
+  height: 200px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-20px);
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+  background-color: #fff;
+  border-bottom: 1px solid ${({ theme }) => theme.style.middleGrey};
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  div {
+    gap: 30px;
+    justify-content: flex-start;
+  }
+  li {
+    width: 200px;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+  a {
+    position: relative;
+    display: block;
+
+    background-color: #000;
+    &:hover img {
+      opacity: 0.5;
+    }
+
+    img {
+      width: 100%;
+      display: block;
+      object-fit: contain;
+      transition: all 0.2s ease-in-out;
+    }
+
+    p {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+    }
   }
 `;
 
