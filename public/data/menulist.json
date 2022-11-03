@@ -2,25 +2,45 @@
   {
     "id": 1,
     "title": "아웃도어",
-    "url": "/outdoor",
-    "image": "https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+    "url": "outdoor",
+    "image": "https://images.unsplash.com/photo-1618417710258-280d6594b47a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1738&q=80",
+    "subLists": [
+      { "subTitle": "서핑", "url": "/surfing" },
+      { "subTitle": "러닝", "url": "/running" },
+      { "subTitle": "캠핑", "url": "/camping" }
+    ]
   },
   {
     "id": 2,
-    "title": "뷰티",
-    "url": "/beauty",
-    "image": "https://images.unsplash.com/photo-1602910344008-22f323cc1817?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+    "title": "베이킹",
+    "url": "baking",
+    "image": "https://images.unsplash.com/photo-1517686469429-8bdb88b9f907?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
+    "subLists": [
+      { "subTitle": "빵", "url": "/bread" },
+      { "subTitle": "케이크", "url": "/cake" },
+      { "subTitle": "쿠키", "url": "/cookie" }
+    ]
   },
   {
     "id": 3,
-    "title": "피트니스",
-    "url": "/fitness",
-    "image": "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+    "title": "여행",
+    "url": "trip",
+    "image": "https://images.unsplash.com/photo-1578894381163-e72c17f2d45f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1812&q=80",
+    "subLists": [
+      { "subTitle": "위프립오리지널", "url": "/original" },
+      { "subTitle": "투어", "url": "/tour" },
+      { "subTitle": "숙소", "url": "/hotel" }
+    ]
   },
   {
     "id": 4,
-    "title": "요리",
-    "url": "/cook",
-    "image": "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+    "title": "뷰티",
+    "url": "beauty",
+    "image": "https://images.unsplash.com/photo-1602910344008-22f323cc1817?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
+    "subLists": [
+      { "subTitle": "피부관리", "url": "/skincare" },
+      { "subTitle": "왁싱", "url": "/waxing" },
+      { "subTitle": "눈썹", "url": "/brow" }
+    ]
   }
 ]

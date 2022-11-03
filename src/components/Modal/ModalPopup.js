@@ -6,6 +6,7 @@ const ModalPopup = props => {
   const {
     title,
     subTitle,
+    btnTitle,
     event,
     close,
     confirm,
@@ -13,11 +14,16 @@ const ModalPopup = props => {
     type,
     state,
     setState,
+    width,
+    height,
+    children,
+    onParams,
   } = props;
 
   const confirmHandler = e => {
     e.stopPropagation();
     event();
+    onParams();
   };
 
   const BackHandler = e => {
@@ -48,7 +54,7 @@ const ModalPopup = props => {
           right: 'auto',
           bottom: 'auto',
           transform: 'translate(-50%, -50%)',
-          width: '20em',
+          width: `${width ? width + 'px' : 'auto'}`,
           boxSizing: 'border-box',
           border: 'none',
           background: 'white',
@@ -57,18 +63,23 @@ const ModalPopup = props => {
           padding: '1.5em 1em',
           textAlign: 'center',
           zIndex: 30,
+          overflow: 'hidden',
+          height: `${height}px`,
         },
       }}
     >
       <Title>{title}</Title>
-      <CloseBtn onClick={close}>닫기</CloseBtn>
+      <Content>{children}</Content>
+      <CloseBtn onClick={confirmHandler}>{btnTitle}</CloseBtn>
     </Modal>
   );
 };
 const Title = styled.div`
   font-size: 20px;
   font-weight: 700;
-  margin-bottom: 50px;
+`;
+const Content = styled.div`
+  padding: 20px 50px;
 `;
 const CloseBtn = styled.button`
   padding: 10px 20px;

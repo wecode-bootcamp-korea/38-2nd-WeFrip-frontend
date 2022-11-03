@@ -3,36 +3,36 @@
   "data": [
     {
       "productId": 0,
-      "title": "[양재/티클래스]나에게 맞는 차를 찾아 떠나는 여행",
-      "thumnail_image_url": "https://cdn.pixabay.com/photo/2022/10/07/09/24/little-panda-7504633__340.jpg",
+      "name": "[양재/티클래스]나에게 맞는 차를 찾아 떠나는 여행",
+      "thumbnailImageUrl": "https://cdn.pixabay.com/photo/2022/10/07/09/24/little-panda-7504633__340.jpg",
       "price": 20000,
       "discountRate": 20
     },
     {
       "productId": 1,
-      "title": "[1:1/소규모] 안무가와 함께 #방송댄스 #코레오 초보 환영!",
-      "thumnail_image_url": "https://cdn.pixabay.com/photo/2022/10/07/09/24/little-panda-7504633__340.jpg",
+      "name": "[1:1/소규모] 안무가와 함께 #방송댄스 #코레오 초보 환영!",
+      "thumbnailImageUrl": "https://cdn.pixabay.com/photo/2022/10/07/09/24/little-panda-7504633__340.jpg",
       "price": 30000,
       "discountRate": 20
     },
     {
       "productId": 2,
-      "title": "[반포] 휘낭시에 3종 만들기",
-      "thumnail_image_url": "https://cdn.pixabay.com/photo/2022/10/07/09/24/little-panda-7504633__340.jpg",
+      "name": "[반포] 휘낭시에 3종 만들기",
+      "thumbnailImageUrl": "https://cdn.pixabay.com/photo/2022/10/07/09/24/little-panda-7504633__340.jpg",
       "price": 40000,
       "discountRate": 20
     },
     {
       "productId": 3,
-      "title": "캠핑카타고 1박2일 무계획 여행,바다 깊은 숲,지역 채식,페스코맛집,요가",
-      "thumnail_image_url": "https://cdn.pixabay.com/photo/2022/10/07/09/24/little-panda-7504633__340.jpg",
+      "name": "캠핑카타고 1박2일 무계획 여행,바다 깊은 숲,지역 채식,페스코맛집,요가",
+      "thumbnailImageUrl": "https://cdn.pixabay.com/photo/2022/10/07/09/24/little-panda-7504633__340.jpg",
       "price": 50000,
       "discountRate": 20
     },
     {
       "productId": 4,
-      "title": "캠핑카타고 1박2일 무계획 여행,바다 깊은 숲,지역 채식,페스코맛집,요가",
-      "thumnail_image_url": "https://cdn.pixabay.com/photo/2022/10/07/09/24/little-panda-7504633__340.jpg",
+      "name": "캠핑카타고 1박2일 무계획 여행,바다 깊은 숲,지역 채식,페스코맛집,요가",
+      "thumbnailImageUrl": "https://cdn.pixabay.com/photo/2022/10/07/09/24/little-panda-7504633__340.jpg",
       "price": 50000,
       "discountRate": 20
     }

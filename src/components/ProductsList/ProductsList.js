@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Product from 'components/Product/Product';
 import API from 'config';
-import { BasicApi } from 'lib/api';
+import { basicApi } from 'lib/api';
 
 const ProductsList = ({ type }) => {
   const [products, setProducts] = useState([]);
@@ -10,7 +10,7 @@ const ProductsList = ({ type }) => {
   useEffect(() => {
     (async () => {
       try {
-        const res = await BasicApi.get(API.mainFrip);
+        const res = await basicApi.get(API.mainFrip);
         const data = await res.data;
         type === '신규 프립'
           ? setProducts(JSON.parse(data.data[0].products))

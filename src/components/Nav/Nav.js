@@ -15,10 +15,20 @@ const Nav = () => {
   const [search, setSearch] = useState('');
   const [menuLists, setMenuLists] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+
   const token = localStorage.getItem('token');
   const removeToken = () => {
     localStorage.removeItem('token');
     navigate('/login');
+  };
+
+  const handleDropdown = e => {
+    e.stopPropagation();
+    if (isOpen === true) {
+      setIsOpen(false);
+    } else {
+      setIsOpen(true);
+    }
   };
   useEffect(() => {
     const pageClickEvent = e => {
@@ -43,7 +53,7 @@ const Nav = () => {
     setSearch(event.target.value);
   };
   useEffect(() => {
-    fetch('data/menulist.json', {
+    fetch('/data/menulist.json', {
       method: 'GET',
     })
       .then(res => res.json())
@@ -77,7 +87,7 @@ const Nav = () => {
       </NavTop>
       <NavBottom>
         <GridWrap>
-          <BsList className="icon" onClick={() => setIsOpen(!isOpen)} />
+          <BsList className="icon" onMouseDown={handleDropdown} />
           <Logo>
             <Link to="/">WeFrip</Link>
           </Logo>
@@ -104,11 +114,11 @@ const Nav = () => {
       </NavBottom>
       <DropdownMenu ref={dropdownRef} className={isOpen ? 'active' : ''}>
         <GridWrap>
-          {menuLists.map(list => (
-            <li key={list.id}>
-              <Link to={list.url}>
-                <img src={list.image} alt={list.title} />
-                <p>{list.title}</p>
+          {menuLists.map(({ url, title, image, id }) => (
+            <li key={id}>
+              <Link to={`/list/${url}`}>
+                <img src={image} alt={title} />
+                <p>{title}</p>
               </Link>
             </li>
           ))}

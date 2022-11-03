@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
-import { AuthApi } from 'lib/api';
+import { authApi } from 'lib/api';
 import API from 'config';
 
 const Product = ({ product }) => {
@@ -10,15 +10,22 @@ const Product = ({ product }) => {
 
   const token = localStorage.getItem('token');
 
-  const discountPrice =
-    product.price - product.price * (product.discountRate / 100);
+  const priceToString = price => {
+    return parseInt(price)
+      .toString()
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
+
+  const discountPrice = priceToString(
+    product.price - product.price * (product.discountRate / 100)
+  );
 
   const postWishInfo = productId => {
     if (!token) {
       return alert('회원전용 서비스입니다!');
     }
     try {
-      AuthApi.post(API.wishlist, { productId });
+      authApi.post(API.wishlist, { productId });
     } catch (err) {
       alert(err);
     }
@@ -32,35 +39,33 @@ const Product = ({ product }) => {
       variables
     >
       <ProductImg src={product.thumbnailImageUrl} alt="상품 사진" />
-      {product.isBookmarked ? (
-        <BsBookmarkFill
-          className="filledIcon"
-          onClick={e => {
-            postWishInfo(product.productId);
-            e.stopPropagation();
-          }}
-        />
-      ) : (
-        <BsBookmark
-          className="filledIcon"
-          onClick={e => {
-            postWishInfo(product.productId);
-            e.stopPropagation();
-          }}
-        />
-      )}
-      <ProductLocation>{product.locationGroupName}</ProductLocation>
-      <ProductTitle>
-        {product.name?.length > 40
-          ? product.name.slice(0, 40) + '. . .'
-          : product.name}
-      </ProductTitle>
-      <DevideLine />
-      <ProductPrice>{product.price}원</ProductPrice>
-      <ProductDicountRate>
-        {product.discountRate}%
-        <ProductDicountPrice>{discountPrice}원</ProductDicountPrice>
-      </ProductDicountRate>
+      <TextWrap>
+        {product.isBookMarked ? (
+          <BsBookmarkFill
+            className="outlinedIcon"
+            onClick={e => {
+              postWishInfo(product.productId);
+              e.stopPropagation();
+            }}
+          />
+        ) : (
+          <BsBookmark
+            className="filledIcon"
+            onClick={e => {
+              postWishInfo(product.productId);
+              e.stopPropagation();
+            }}
+          />
+        )}
+        <ProductLocation>{product.locationGroupName}</ProductLocation>
+        <ProductTitle>{product.name}</ProductTitle>
+        <DevideLine />
+        <ProductPrice>{priceToString(product.price)}원</ProductPrice>
+        <ProductDicountRate>
+          {product.discountRate}%
+          <ProductDicountPrice>{discountPrice}원</ProductDicountPrice>
+        </ProductDicountRate>
+      </TextWrap>
     </ProductContainer>
   );
 };
@@ -68,7 +73,15 @@ const Product = ({ product }) => {
 const ProductContainer = styled.div`
   ${({ theme }) => theme.variables.position('relative', null, null)}
   width: 260px;
+  border-radius: 8px;
+  border: 1px solid ${({ theme }) => theme.style.lightGrey};
+  overflow: hidden;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 10px 0px;
+  }
 
   .outlinedIcon {
     ${({ theme }) => theme.variables.position('absolute', '210px', '20px')}
@@ -86,11 +99,14 @@ const ProductContainer = styled.div`
     cursor: pointer;
   }
 `;
-
+const TextWrap = styled.div`
+  padding: 10px 20px;
+`;
 const ProductImg = styled.img`
-  width: 259px;
+  display: block;
+  width: 100%;
   height: 259px;
-  border-radius: 5px;
+  object-fit: cover;
 `;
 
 const ProductLocation = styled.p`
@@ -106,9 +122,11 @@ const ProductTitle = styled.p`
   height: auto;
   font-size: 16px;
   font-weight: 400;
-  word-break: keep-all;
-  overflow-wrap: break-word;
   line-height: 22px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 `;
 
 const DevideLine = styled.div`
