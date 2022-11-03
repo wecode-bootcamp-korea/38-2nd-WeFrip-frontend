@@ -63,6 +63,7 @@ const contents = [
 ];
 
 const Container = styled.div`
+  margin-top: 100px;
   width: 100%;
   background-color: ${({ theme }) => theme.style.lightGrey};
   padding-top: 30px;
