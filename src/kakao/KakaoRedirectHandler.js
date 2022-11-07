@@ -37,7 +37,7 @@ const KakaoRedirectHandler = () => {
     } catch (err) {
       alert(err);
     }
-  }, []);
+  }, [navigate]);
 
   return <div />;
 };

@@ -19,12 +19,12 @@ const HostRegist = () => {
     thumbnailImageUrl: [],
     participants: 0,
     dicountRate: 0,
-    scheduleTitle: '',
-    scheduleEtc: '',
+    schedules: [{ content: '', startTime: '', finishTime: '' }],
     classTypeId: 0,
     subCategoryId: 0,
     levelId: 0,
   });
+  console.log(formData, 'formData');
 
   const formDataHandler = e => {
     const { name, value } = e.target;
