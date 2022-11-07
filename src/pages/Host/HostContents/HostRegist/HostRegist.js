@@ -12,7 +12,10 @@ const HostRegist = () => {
     lastDate: '',
     price: 0,
     description: '',
-    location: '',
+    locationGroupName: '',
+    latitude: 0,
+    longitude: 0,
+    placeUrl: '',
     thumbnailImageUrl: [],
     participants: 0,
     dicountRate: 0,
@@ -23,6 +26,16 @@ const HostRegist = () => {
     levelId: 0,
   });
 
+  const formDataHandler = e => {
+    const { name, value } = e.target;
+
+    if (name === 'levelId') {
+      setFormData({ ...formData, [name]: parseInt(value) });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
+  };
+
   return (
     <RegistContainer>
       <RegistContentsBox
@@ -30,6 +43,7 @@ const HostRegist = () => {
         setTabName={setTabName}
         formData={formData}
         setFormData={setFormData}
+        formDataHandler={formDataHandler}
       />
       <RegistGuideBox />
       <HostFooter tabName={tabName} setTabName={setTabName} />
