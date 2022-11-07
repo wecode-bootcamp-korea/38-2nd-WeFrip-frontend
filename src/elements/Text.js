@@ -81,7 +81,7 @@ Text.defaultProps = {
   bold: false,
   bold2: false,
   color: '#222831',
-  size: '1.4rem',
+  size: '16px',
   margin: false,
   width: '',
   minWidth: '',
@@ -109,7 +109,7 @@ const P = styled.p`
   /* word-break: keep-all; */
   color: ${props => props.color};
   font-size: ${props => props.size};
-  font-weight: ${props => (props.bold ? '600' : '400')};
+  font-weight: ${props => (props.bold ? '700' : '400')};
   ${props => (props.bold2 ? `font-weight: ${props.bold2};` : '')}
   ${props => (props.margin ? `margin: ${props.margin};` : '')}
   ${props => (props.padding ? `padding: ${props.padding};` : '')}
