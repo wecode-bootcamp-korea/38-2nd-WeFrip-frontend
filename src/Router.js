@@ -9,22 +9,23 @@ import Mypage from './pages/Mypage/Mypage';
 import Wishlist from './pages/Wishlist/Wishlist';
 import Nav from './components/Nav/Nav';
 import Footer from './components/Footer/Footer';
+import MainLayout from 'pages/MainLayout/MainLayout';
 
 const Router = () => {
   return (
     <BrowserRouter>
-      <Nav />
       <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/list" element={<List />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/products/:productId" element={<Products />} />
-        <Route path="/login" element={<Login />} />
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<Main />} />
+          <Route path="/list" element={<List />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/products/:productId" element={<Products />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/mypage" element={<Mypage />} />
+          <Route path="/wishlist" element={<Wishlist />} />
+        </Route>
         <Route path="/host" element={<Host />} />
-        <Route path="/mypage" element={<Mypage />} />
-        <Route path="/wishlist" element={<Wishlist />} />
       </Routes>
-      <Footer />
     </BrowserRouter>
   );
 };

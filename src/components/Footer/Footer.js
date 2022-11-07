@@ -1,4 +1,5 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import variables from '../../styles/variables';
 
@@ -107,12 +108,6 @@ const DownloadBox = styled.button`
   font-size: 12px;
   font-weight: bold;
   letter-spacing: -0.3px;
-`;
-
-const IconBox = styled.div`
-  display: flex;
-  align-items: center;
-  width: 100%;
 `;
 
 const Icon = styled.img`
