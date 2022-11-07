@@ -58,7 +58,7 @@ const CONTENTS_DISABLED_LIST = [
       { id: 0, text: '활동적인 액티비티 프립' },
       { id: 1, text: '개인 과외 프립' },
       { id: 2, text: '요리, 음료를 제공하는 프립' },
-      { id: 2, text: '주류를 제공할 경우 주의사항' },
+      { id: 3, text: '주류를 제공할 경우 주의사항' },
     ],
   },
   {

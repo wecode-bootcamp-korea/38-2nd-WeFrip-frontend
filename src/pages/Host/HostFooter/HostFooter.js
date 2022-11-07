@@ -2,26 +2,34 @@ import React from 'react';
 import styled from 'styled-components';
 import { RiArrowDownSLine, RiArrowUpSLine } from 'react-icons/ri';
 
-const HostFooter = ({ scrollRef }) => {
-  const scrollUp = () => {
-    scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
-
-  const scrollDown = () => {
-    scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
+const HostFooter = ({ tabName, setTabName }) => {
+  const handleClickNextPage = tabName => {
+    if (tabName === '기본 정보') {
+      setTabName('장소 정보');
+    } else if (tabName === '장소 정보') {
+      setTabName('판매 정보');
+    } else if (tabName === '판매 정보') {
+      setTabName('프립 설명');
+    }
   };
 
   return (
     <FooterContainer>
       <FooterBtnBox>
-        <ScrollBtn onClick={scrollDown}>
+        <ScrollBtn>
           <RiArrowDownSLine />
         </ScrollBtn>
-        <ScrollBtn onClick={scrollUp}>
+        <ScrollBtn>
           <RiArrowUpSLine />
         </ScrollBtn>
       </FooterBtnBox>
-      <FooterNextBtn>다음</FooterNextBtn>
+      <FooterNextBtn
+        onClick={() => {
+          handleClickNextPage(tabName);
+        }}
+      >
+        {tabName === '프립 설명' ? '등록' : '다음'}
+      </FooterNextBtn>
     </FooterContainer>
   );
 };

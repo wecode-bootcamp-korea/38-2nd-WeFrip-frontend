@@ -5,25 +5,7 @@ import RegistDescInfo from './RegistDescInfo/RegistDescInfo';
 import RegistPlaceInfo from './RegistPlaceInfo/RegistPlaceInfo';
 import RegistSaleInfo from './RegistSaleInfo/RegistSaleInfo';
 
-const RegistContentsBox = () => {
-  const [tabName, setTabName] = useState('기본 정보');
-  const [formData, setFormData] = useState({
-    name: '',
-    firstDate: '',
-    lastDate: '',
-    price: 0,
-    description: '',
-    location: '',
-    thumbnailImageUrl: [],
-    participants: 0,
-    dicountRate: 0,
-    scheduleTitle: '',
-    scheduleEtc: '',
-    classTypeId: 0,
-    subCategoryId: 0,
-    levelId: 0,
-  });
-
+const RegistContentsBox = ({ tabName, setTabName, formData, setFormData }) => {
   const TAB_COMPONENT = {
     '기본 정보': (
       <RegistBasicInfo formData={formData} setFormData={setFormData} />
@@ -44,9 +26,10 @@ const RegistContentsBox = () => {
       <TabBox>
         {TAB_NAME.map(tab =>
           tabName === tab.name ? (
-            <ActiveTab>{tab.name}</ActiveTab>
+            <ActiveTab key={tab.id}>{tab.name}</ActiveTab>
           ) : (
             <Tab
+              key={tab.id}
               onClick={() => {
                 setTabName(tab.name);
               }}
