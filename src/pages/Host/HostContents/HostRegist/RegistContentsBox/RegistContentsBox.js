@@ -1,23 +1,45 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import RegistBasicInfo from './RegistBasicInfo/RegistBasicInfo';
 import RegistDescInfo from './RegistDescInfo/RegistDescInfo';
 import RegistPlaceInfo from './RegistPlaceInfo/RegistPlaceInfo';
 import RegistSaleInfo from './RegistSaleInfo/RegistSaleInfo';
 
-const RegistContentsBox = ({ tabName, setTabName, formData, setFormData }) => {
+const RegistContentsBox = ({
+  tabName,
+  setTabName,
+  formData,
+  setFormData,
+  formDataHandler,
+}) => {
   const TAB_COMPONENT = {
     '기본 정보': (
-      <RegistBasicInfo formData={formData} setFormData={setFormData} />
+      <RegistBasicInfo
+        formDataHandler={formDataHandler}
+        formData={formData}
+        setFormData={setFormData}
+      />
     ),
     '장소 정보': (
-      <RegistPlaceInfo formData={formData} setFormData={setFormData} />
+      <RegistPlaceInfo
+        formDataHandler={formDataHandler}
+        formData={formData}
+        setFormData={setFormData}
+      />
     ),
     '판매 정보': (
-      <RegistSaleInfo formData={formData} setFormData={setFormData} />
+      <RegistSaleInfo
+        formDataHandler={formDataHandler}
+        formData={formData}
+        setFormData={setFormData}
+      />
     ),
     '프립 설명': (
-      <RegistDescInfo formData={formData} setFormData={setFormData} />
+      <RegistDescInfo
+        formDataHandler={formDataHandler}
+        formData={formData}
+        setFormData={setFormData}
+      />
     ),
   };
 

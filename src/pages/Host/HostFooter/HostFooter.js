@@ -43,6 +43,7 @@ const FooterContainer = styled.div`
   height: 71px;
   border-top: 1px solid ${({ theme }) => theme.style.middleGrey};
   background-color: white;
+  z-index: 100;
 `;
 
 const FooterBtnBox = styled.div`
