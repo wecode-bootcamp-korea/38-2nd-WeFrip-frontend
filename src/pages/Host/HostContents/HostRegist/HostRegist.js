@@ -16,7 +16,7 @@ const HostRegist = () => {
     latitude: 0,
     longitude: 0,
     placeUrl: '',
-    thumbnailImageUrl: [],
+    thumbnailImageUrl: [null, null, null, null, null],
     participants: 0,
     dicountRate: 0,
     scheduleTitle: '',
