@@ -21,7 +21,6 @@ const KakaoRedirectHandler = () => {
         )
         .then(res => res.data)
         .then(data => {
-          console.log(data);
           if (data.access_token) {
             BasicApi.post(API.signin, { kakaoAccessToken: data.access_token })
               .then(res => res.data)
