@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import HostAside from './HostAside/HostAside';
 import HostContents from './HostContents/HostContents';
@@ -17,6 +17,7 @@ const Host = () => {
 
 const HostContainer = styled.div`
   width: 100%;
+  height: 100vh;
   padding-bottom: 100px;
   background-color: ${({ theme }) => theme.style.lightGrey};
 `;

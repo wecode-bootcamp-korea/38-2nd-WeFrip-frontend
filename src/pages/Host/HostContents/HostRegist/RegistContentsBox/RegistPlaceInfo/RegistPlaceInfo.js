@@ -29,7 +29,7 @@ const RegistPlaceInfo = ({ formData, setFormData }) => {
             id: cur.id,
             content: cur.place_name,
             placeUrl: cur.place_url,
-            location: cur.address_name.split(' ').slice(0, 2).join(' '),
+            location: cur.address_name,
           });
           bounds.extend(new kakao.maps.LatLng(cur.y, cur.x));
         });
@@ -119,7 +119,10 @@ const RegistPlaceInfo = ({ formData, setFormData }) => {
                     longitude: Number(list.position.lng),
                     name: list.content,
                     placeUrl: list.placeUrl,
-                    locationGroupName: list.location,
+                    locationGroupName: list.location
+                      .split(' ')
+                      .slice(0, 2)
+                      .join(' '),
                   });
                 }}
                 key={list.id}
@@ -137,7 +140,10 @@ const RegistPlaceInfo = ({ formData, setFormData }) => {
                     longitude: Number(list.position.lng),
                     name: list.content,
                     placeUrl: list.placeUrl,
-                    locationGroupName: list.location,
+                    locationGroupName: list.location
+                      .split(' ')
+                      .slice(0, 2)
+                      .join(' '),
                   });
                 }}
                 key={list.id}
