@@ -3,6 +3,7 @@ const API = {
   wishlist: `/wishlists`,
   signin: `/users/signin`,
   list: `/products/category`,
+  detail: `/products`,
 };
 
 export default API;

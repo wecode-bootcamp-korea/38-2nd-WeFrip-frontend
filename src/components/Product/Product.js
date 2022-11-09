@@ -6,6 +6,16 @@ import { authApi } from 'lib/api';
 import API from 'config';
 
 const Product = ({ product }) => {
+  const {
+    productId,
+    thumbnailImageUrl,
+    discountRate,
+    locationGroupName,
+    name,
+    price,
+    isBookMarked,
+  } = product;
+
   const navigate = useNavigate();
 
   const token = localStorage.getItem('token');
@@ -16,9 +26,7 @@ const Product = ({ product }) => {
       .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
 
-  const discountPrice = priceToString(
-    product.price - product.price * (product.discountRate / 100)
-  );
+  const discountPrice = priceToString(price - price * (discountRate / 100));
 
   const postWishInfo = productId => {
     if (!token) {
@@ -34,17 +42,17 @@ const Product = ({ product }) => {
   return (
     <ProductContainer
       onClick={() => {
-        navigate(`/products/${product.productId}`);
+        navigate(`/products/${productId}`);
       }}
       variables
     >
-      <ProductImg src={product.thumbnailImageUrl} alt="상품 사진" />
+      <ProductImg src={thumbnailImageUrl} alt="상품 사진" />
       <TextWrap>
-        {product.isBookMarked ? (
+        {isBookMarked ? (
           <BsBookmarkFill
             className="outlinedIcon"
             onClick={e => {
-              postWishInfo(product.productId);
+              postWishInfo(productId);
               e.stopPropagation();
             }}
           />
@@ -52,17 +60,17 @@ const Product = ({ product }) => {
           <BsBookmark
             className="filledIcon"
             onClick={e => {
-              postWishInfo(product.productId);
+              postWishInfo(productId);
               e.stopPropagation();
             }}
           />
         )}
-        <ProductLocation>{product.locationGroupName}</ProductLocation>
-        <ProductTitle>{product.name}</ProductTitle>
+        <ProductLocation>{locationGroupName}</ProductLocation>
+        <ProductTitle>{name}</ProductTitle>
         <DevideLine />
-        <ProductPrice>{priceToString(product.price)}원</ProductPrice>
+        <ProductPrice>{priceToString(price)}원</ProductPrice>
         <ProductDicountRate>
-          {product.discountRate}%
+          {discountRate}%
           <ProductDicountPrice>{discountPrice}원</ProductDicountPrice>
         </ProductDicountRate>
       </TextWrap>

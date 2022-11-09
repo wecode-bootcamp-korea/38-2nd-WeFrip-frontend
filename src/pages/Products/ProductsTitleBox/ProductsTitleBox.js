@@ -1,29 +1,59 @@
 import React from 'react';
 import styled from 'styled-components';
+import Slider from 'react-slick';
+import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import Grid from 'elements/Grid';
 
-const ProductsTitleBox = () => {
+const ProductsTitleBox = ({ productData }) => {
+  const { discountRate, price, productImages, name, description } = productData;
+
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    nextArrow: (
+      <NextTo>
+        <MdArrowForwardIos className="nextIcon" />
+      </NextTo>
+    ),
+    prevArrow: (
+      <Pre>
+        <MdArrowBackIos className="prevIcon" />
+      </Pre>
+    ),
+  };
+
+  const discountPrice =
+    ((100 - parseInt(discountRate)) / 100) * parseInt(price);
+
+  const priceToString = price => {
+    return parseInt(price)
+      .toString()
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
+
   return (
     <TitleContainer>
-      <TitleImg src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2,f_auto,q_auto,w_375/wine_7a120fbe2ad3240b16acc9c15be76c7ca903f8bbacdb947eb9716d554b7cbccc" />
+      <StyledSlider {...settings}>
+        {productImages &&
+          productImages.map(img => <TitleImg src={img} key={img} alt="사진" />)}
+      </StyledSlider>
       <TitleInfoBox>
-        <InfoTitle>[렛츠밋업] MZ 와인파티 (강남/종로/여의도/판교)</InfoTitle>
+        <InfoTitle>{name}</InfoTitle>
         <Grid display="flex">
-          <InfoDiscountRate>30%</InfoDiscountRate>
-          <InfoDiscountPrice>56,000원</InfoDiscountPrice>
-          <InfoPrice>80,000원</InfoPrice>
+          <InfoDiscountRate>{priceToString(discountRate)}%</InfoDiscountRate>
+          <InfoDiscountPrice>
+            {priceToString(discountPrice)}원
+          </InfoDiscountPrice>
+          <InfoPrice>{priceToString(price)}원</InfoPrice>
         </Grid>
         <Grid>
           <DevideLine />
-          <InfoDescription>
-            다양한 생각, 취미와 MBTI를 가진 MZ들을 위한 와인파티를 진행합니다.
-            다양한 직업군, 다양한 경험을 가지고 있는 MZ들이 모여, 때로는 인연을,
-            때로는 친구를 얻어갈 수 있도록 파티를 준비했습니다. #MZ파티
-            #와인파티 #청춘파티 #사교모임 렛츠밋업은 파티룸을 대관하여
-            진행합니다. 성비를 맞춰 최소 24~최대 36명으로 진행됩니다. 테이블마다
-            제공되는 와인과 안주를 즐기며, 다양한 참가자와 파티를 즐길 수 있도록
-            컨텐츠가 준비되어있습니다.
-          </InfoDescription>
+          <InfoDescription>{description}</InfoDescription>
         </Grid>
         <InfoUser>
           <Grid display="flex">
@@ -39,6 +69,45 @@ const ProductsTitleBox = () => {
     </TitleContainer>
   );
 };
+
+const StyledSlider = styled(Slider)`
+  position: relative;
+  height: 400px;
+  width: 400px;
+  .slick-prev::before,
+  .slick-next::before {
+    opacity: 0;
+    display: none;
+  }
+`;
+
+const Pre = styled.div`
+  position: absolute;
+  left: 3%;
+  width: 30px;
+  height: 30px;
+  z-index: 10;
+
+  .prevIcon {
+    color: white;
+    font-size: 30px;
+    z-index: 11;
+  }
+`;
+
+const NextTo = styled.div`
+  position: absolute;
+  right: 3%;
+  width: 30px;
+  height: 30px;
+  z-index: 10;
+
+  .nextIcon {
+    color: white;
+    font-size: 30px;
+    z-index: 11;
+  }
+`;
 
 const TitleContainer = styled.div`
   ${({ theme }) => theme.variables.flex('row', null, null)}

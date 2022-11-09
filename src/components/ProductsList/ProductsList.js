@@ -12,6 +12,7 @@ const ProductsList = ({ type }) => {
       try {
         const res = await basicApi.get(API.mainFrip);
         const data = await res.data;
+
         type === '신규 프립'
           ? setProducts(JSON.parse(data.data[0].products))
           : setProducts(JSON.parse(data.data[1].products));
@@ -30,9 +31,10 @@ const ProductsList = ({ type }) => {
         <ProductSeeAll>전체 보기</ProductSeeAll>
       </ProductTitleBox>
       <ProductListBox>
-        {products?.map(products => (
-          <Product key={products.productId} product={products} />
-        ))}
+        {products &&
+          products.map(products => (
+            <Product key={products.productId} product={products} />
+          ))}
       </ProductListBox>
     </ProductsListContainer>
   );

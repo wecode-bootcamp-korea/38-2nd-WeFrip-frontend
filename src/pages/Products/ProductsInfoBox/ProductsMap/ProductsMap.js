@@ -3,15 +3,17 @@ import styled from 'styled-components';
 import { Map, MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk';
 import Grid from 'elements/Grid';
 
-const ProductsMap = () => {
+const ProductsMap = ({ productData }) => {
+  const { latitude, longitude, placeUrl, placeName } = productData;
+
   return (
     <MapContainer>
       <MapTitle>진행하는 장소</MapTitle>
       <Grid>
         <Map
           center={{
-            lat: 37.54699,
-            lng: 127.09598,
+            lat: latitude,
+            lng: longitude,
           }}
           style={{
             width: '100%',
@@ -19,20 +21,28 @@ const ProductsMap = () => {
           }}
           level={4}
         >
-          <MapMarker position={{ lat: 37.54699, lng: 127.09598 }} />
+          <MapMarker
+            position={{
+              lat: latitude,
+              lng: longitude,
+            }}
+          />
           <CustomOverlayMap
-            position={{ lat: 37.54699, lng: 127.09598 }}
+            position={{
+              lat: latitude,
+              lng: longitude,
+            }}
             yAnchor={3}
             xAnchor={0.5}
           >
             <CustomOverlay>
               <a
-                href="https://map.kakao.com/link/map/11394059"
+                href={placeUrl}
                 target="_blank"
                 rel="noreferrer"
                 style={{ textDecoration: 'none' }}
               >
-                <LocationBox>구의 야구 공원</LocationBox>
+                <LocationBox>{placeName}</LocationBox>
               </a>
             </CustomOverlay>
           </CustomOverlayMap>
@@ -60,9 +70,9 @@ const LocationBox = styled.span`
   display: block;
   padding: 5px;
   height: 20px;
-  border-radius: 3px;
   background-color: ${({ theme }) => theme.style.primaryColor};
   color: white;
+  border-radius: 3px;
   font-size: 12px;
 `;
 

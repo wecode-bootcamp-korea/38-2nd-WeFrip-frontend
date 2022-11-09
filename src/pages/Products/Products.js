@@ -1,14 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import ProductsInfoBox from './ProductsInfoBox/ProductsInfoBox';
-import ProductsRecommendBox from './ProductsRecommendBox/ProductsRecommendBox';
 import ProductsTitleBox from './ProductsTitleBox/ProductsTitleBox';
+import API from 'config';
+import { basicApi } from 'lib/api';
+
 const Products = () => {
+  const [productData, setProductData] = useState({});
+
+  const params = useParams();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await basicApi.get(`${API.detail}/${params.productId}`);
+        const data = await res.data.data;
+
+        setProductData({
+          ...data[0],
+          productImages: JSON.parse(data[0]?.productImages),
+          schedules: JSON.parse(data[0]?.schedules),
+          latitude: Number(data[0].latitude),
+          longitude: Number(data[0].longitude),
+        });
+      } catch (err) {
+        alert(err);
+      }
+    })();
+  }, []);
+
   return (
     <ProductsContainer>
-      <ProductsTitleBox />
-      <ProductsInfoBox />
-      <ProductsRecommendBox />
+      <ProductsTitleBox productData={productData} />
+      <ProductsInfoBox productData={productData} />
     </ProductsContainer>
   );
 };

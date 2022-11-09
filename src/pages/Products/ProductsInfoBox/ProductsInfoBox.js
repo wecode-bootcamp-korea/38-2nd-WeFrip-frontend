@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import ProductsCurriculum from './ProductsCurriculum/ProductsCurriculum';
 import ProductsMap from './ProductsMap/ProductsMap';
 
-const ProductsInfoBox = () => {
+const ProductsInfoBox = ({ productData }) => {
   return (
     <InfoContainer>
-      <ProductsCurriculum />
-      <ProductsMap />
+      <ProductsCurriculum productData={productData} />
+      <ProductsMap productData={productData} />
     </InfoContainer>
   );
 };
