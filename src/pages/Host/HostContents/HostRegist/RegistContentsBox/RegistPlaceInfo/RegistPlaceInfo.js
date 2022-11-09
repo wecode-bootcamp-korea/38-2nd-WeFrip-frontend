@@ -117,7 +117,7 @@ const RegistPlaceInfo = ({ formData, setFormData }) => {
                     ...formData,
                     latitude: Number(list.position.lat),
                     longitude: Number(list.position.lng),
-                    name: list.content,
+                    placeName: list.content,
                     placeUrl: list.placeUrl,
                     locationGroupName: list.location
                       .split(' ')
@@ -138,7 +138,7 @@ const RegistPlaceInfo = ({ formData, setFormData }) => {
                     ...formData,
                     latitude: Number(list.position.lat),
                     longitude: Number(list.position.lng),
-                    name: list.content,
+                    placeName: list.content,
                     placeUrl: list.placeUrl,
                     locationGroupName: list.location
                       .split(' ')
