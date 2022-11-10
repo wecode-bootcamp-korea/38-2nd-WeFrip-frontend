@@ -28,7 +28,7 @@ const Wishlist = () => {
   return (
     <Page>
       <Wrapper>
-        {wished[0] ? (
+        {wished.length > 0 ? (
           <Wishlistlist wished={wished} />
         ) : (
           <>
