@@ -24,7 +24,6 @@ const HostRegist = () => {
     subCategoryId: 0,
     levelId: 0,
   });
-  console.log(formData, 'formData');
 
   const formDataHandler = e => {
     const { name, value } = e.target;

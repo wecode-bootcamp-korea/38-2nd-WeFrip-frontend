@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { authApi } from 'lib/api';
 import API from 'config';
 
-const Product = ({ product }) => {
+const Product = ({ product, bookmarks, setBookmarks }) => {
   const {
     productId,
     thumbnailImageUrl,
@@ -13,7 +13,7 @@ const Product = ({ product }) => {
     locationGroupName,
     name,
     price,
-    isBookMarked,
+    isBookmarked,
   } = product;
 
   const navigate = useNavigate();
@@ -39,6 +39,17 @@ const Product = ({ product }) => {
     }
   };
 
+  const deleteBookmark = productId => {
+    const filteredBookmarks = bookmarks.filter(
+      bookmark => bookmark.productId !== productId
+    );
+    setBookmarks(filteredBookmarks);
+  };
+
+  const addBookmark = productId => {
+    setBookmarks([...bookmarks, { productId: productId }]);
+  };
+
   return (
     <ProductContainer
       onClick={() => {
@@ -48,11 +59,12 @@ const Product = ({ product }) => {
     >
       <ProductImg src={thumbnailImageUrl} alt="상품 사진" />
       <TextWrap>
-        {isBookMarked ? (
+        {isBookmarked ? (
           <BsBookmarkFill
             className="outlinedIcon"
             onClick={e => {
               postWishInfo(productId);
+              token && deleteBookmark(productId);
               e.stopPropagation();
             }}
           />
@@ -61,6 +73,7 @@ const Product = ({ product }) => {
             className="filledIcon"
             onClick={e => {
               postWishInfo(productId);
+              token && addBookmark(productId);
               e.stopPropagation();
             }}
           />
@@ -95,7 +108,7 @@ const ProductContainer = styled.div`
     ${({ theme }) => theme.variables.position('absolute', '210px', '20px')}
     width: 30px;
     height: 30px;
-    color: ${({ theme }) => theme.style.white};
+    color: ${({ theme }) => theme.style.subPrimaryColor};
     cursor: pointer;
   }
 
