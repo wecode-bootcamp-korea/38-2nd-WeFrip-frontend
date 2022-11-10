@@ -39,33 +39,34 @@ const CONTENTS = [
   {
     id: 0,
     imgUrl:
-      'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FbPt2Uf%2FbtrP8LeXNtV%2FeBiQnawqACLsFM3WXsxA21%2Fimg.png',
+      'https://images.unsplash.com/photo-1602248034387-a8c244b224b2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2272&q=80',
   },
   {
     id: 1,
     imgUrl:
-      'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FvhMFr%2FbtrP8KHbJbt%2FfjKpQpLVrh8mW1T0Or4CtK%2Fimg.png',
+      'https://images.unsplash.com/photo-1540539234-c14a20fb7c7b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80',
   },
   {
     id: 2,
     imgUrl:
-      'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FlAkpC%2FbtrP9HivKgI%2FSzP7YDdC3KvpRvGotYdkfK%2Fimg.png',
+      'https://images.unsplash.com/photo-1530541930197-ff16ac917b0e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80',
   },
   {
     id: 3,
     imgUrl:
-      'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FwAQZI%2FbtrQaLkrX5t%2F8bvWZfKxJ3tHttvweElQ6K%2Fimg.png',
+      'https://images.unsplash.com/photo-1534081333815-ae5019106622?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1548&q=80',
   },
   {
     id: 4,
     imgUrl:
-      'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FlYVVg%2FbtrP7TEgFya%2FUWyz1qmFOAKeKvTmBii6x1%2Fimg.png',
+      'https://images.unsplash.com/photo-1519671282429-b44660ead0a7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80',
   },
 ];
 
 const MainCarouselContainer = styled.div`
   width: 100%;
-  height: 310px;
+  height: 350px;
+  overflow: hidden;
 `;
 const StyledSlider = styled(Slider)`
   position: relative;
@@ -108,7 +109,8 @@ const NextTo = styled.div`
 
 const CarouselImg = styled.img`
   width: 500px;
-  height: 310px;
+  height: 350px;
+  object-fit: cover;
 `;
 
 export default MainCarousel;
