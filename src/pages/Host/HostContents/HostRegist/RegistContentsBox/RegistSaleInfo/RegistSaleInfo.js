@@ -10,6 +10,8 @@ const RegistSaleInfo = ({ formData, setFormData }) => {
   const [endDate, setEndDate] = useState(startDate);
   const [toggle, setToggle] = useState(false);
   const [selectedNumber, setSelectedNumber] = useState(1);
+  const [price, setPrice] = useState('');
+  const [discount, setDiscount] = useState('');
   const makeArray = () => {
     const numArray = [];
     for (let i = 1; i <= 10; i++) {
@@ -37,6 +39,15 @@ const RegistSaleInfo = ({ formData, setFormData }) => {
     const startForm = toStringByFormatting(date, '-');
     setFormData({ ...formData, firstDate: startForm });
   };
+  const handlePrice = e => {
+    setPrice(e.target.value);
+    setFormData({ ...formData, price: Number(e.target.value) });
+  };
+  const handleDiscount = e => {
+    setDiscount(e.target.value);
+    setFormData({ ...formData, discountRate: Number(e.target.value) });
+  };
+  const lastPrice = (100 - Number(discount)) * 0.01 * price;
 
   const onChangeEndDate = date => {
     setEndDate(date);
@@ -68,6 +79,25 @@ const RegistSaleInfo = ({ formData, setFormData }) => {
           />
           <DatePickerHostStyles />
         </InputWrap>
+      </SaleBox>
+      <Hr />
+      <SaleBox>
+        <Title>가격 설정</Title>
+        <PriceInfo>
+          <SubTitle>판매 가격 설정</SubTitle>
+          <input type="text" value={price} onChange={handlePrice} />
+        </PriceInfo>
+        <PriceInfo>
+          <SubTitle>가격 할인율 설정</SubTitle>
+          <input type="text" value={discount} onChange={handleDiscount} />
+          <span className="discountIcon">%</span>
+        </PriceInfo>
+        <PriceInfo>
+          <SubTitle>최종 가격 확인</SubTitle>
+          <LastPrice>
+            {lastPrice ? `${lastPrice}원` : '숫자를 입력해주세요'}
+          </LastPrice>
+        </PriceInfo>
       </SaleBox>
       <Hr />
       <SaleBox>
@@ -165,6 +195,19 @@ const SaleType = styled.div`
   display: flex;
   margin-bottom: 50px;
   width: 100%;
+`;
+const PriceInfo = styled.div`
+  display: flex;
+  margin-bottom: 50px;
+  width: 100%;
+  align-items: center;
+  .discountIcon {
+    margin-left: 5px;
+  }
+`;
+const LastPrice = styled.div`
+  font-size: 20px;
+  font-weight: 700;
 `;
 
 const SelectWrap = styled.div`

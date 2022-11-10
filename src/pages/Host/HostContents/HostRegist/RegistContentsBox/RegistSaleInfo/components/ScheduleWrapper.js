@@ -26,7 +26,7 @@ const ScheduleWrapper = ({ formData, setFormData, index, schedules }) => {
       finishTime: setFinishTime,
     };
 
-    setFormData({ schedules: newArr });
+    setFormData({ ...formData, schedules: newArr });
   }, [index, timeValue]);
 
   return (

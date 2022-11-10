@@ -17,7 +17,7 @@ const Host = () => {
 
 const HostContainer = styled.div`
   width: 100%;
-  height: 100vh;
+  height: auto;
   padding-bottom: 100px;
   background-color: ${({ theme }) => theme.style.lightGrey};
 `;
