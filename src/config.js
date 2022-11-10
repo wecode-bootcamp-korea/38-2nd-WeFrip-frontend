@@ -4,6 +4,7 @@ const API = {
   signin: `/users/signin`,
   list: `/products/category`,
   detail: `/products`,
+  postFripData: `/products?directory=products`,
 };
 
 export default API;

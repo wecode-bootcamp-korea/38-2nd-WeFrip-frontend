@@ -11,12 +11,13 @@ const RegistDescInfo = ({ formData, setFormData }) => {
         <InputWrap>
           <SubTitle>대표 이미지</SubTitle>
           <ImageBoxWrap>
-            {formData.thumbnailImageUrl.map((imageList, idx) => (
+            {formData?.thumbnailImageUrl.map((imageList, idx) => (
               <ImageUpload
-                key={imageList}
+                key={idx}
                 formData={formData}
                 setFormData={setFormData}
                 idx={idx}
+                imageList={imageList}
               />
             ))}
           </ImageBoxWrap>
