@@ -5,6 +5,8 @@ import axios from 'axios';
 import { BASE_URL } from 'lib/api';
 
 const Mypage = () => {
+  const navigate = useNavigate();
+
   const [userProfileInfo, setUserProfileInfo] = useState({
     hostName: '',
     email: '',
@@ -77,6 +79,7 @@ const Mypage = () => {
         Authorization: localStorage.getItem('token'),
       },
     });
+    navigate('/');
   };
 
   return (
@@ -198,13 +201,13 @@ const Input = styled.input`
 
 const Button = styled.button`
   padding: 10px;
-  width: 140px;
+  width: 100px;
   margin-top: 60px;
   background-color: #7b29fa;
   color: white;
   border: none;
   border-radius: 7px;
-  font-size: 30px;
+  font-size: 25px;
   font-weight: 700;
 `;
 const InputFooter = styled.div`
