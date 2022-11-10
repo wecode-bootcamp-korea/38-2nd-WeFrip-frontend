@@ -41,7 +41,7 @@ const ImageUpload = ({ formData, setFormData, idx }) => {
 
   useEffect(() => {
     return () => {
-      URL.revokeObjectURL(imagePlace.preview_URL);
+      URL.revokeObjectURL(imagePlace?.preview_URL);
     };
   }, []);
 

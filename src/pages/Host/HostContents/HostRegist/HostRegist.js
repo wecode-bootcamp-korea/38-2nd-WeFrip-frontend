@@ -10,7 +10,7 @@ const HostRegist = () => {
     name: '',
     firstDate: '',
     lastDate: '',
-    price: 0,
+    price: 30000,
     description: '',
     locationGroupName: '',
     latitude: 0,
@@ -18,7 +18,7 @@ const HostRegist = () => {
     placeUrl: '',
     thumbnailImageUrl: [null, null, null, null, null],
     participants: 0,
-    dicountRate: 0,
+    discountRate: '20',
     schedules: [{ content: '', startTime: '', finishTime: '' }],
     classTypeId: 0,
     subCategoryId: 0,
@@ -45,7 +45,11 @@ const HostRegist = () => {
         formDataHandler={formDataHandler}
       />
       <RegistGuideBox />
-      <HostFooter tabName={tabName} setTabName={setTabName} />
+      <HostFooter
+        tabName={tabName}
+        setTabName={setTabName}
+        formData={formData}
+      />
     </RegistContainer>
   );
 };
