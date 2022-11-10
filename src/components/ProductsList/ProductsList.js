@@ -2,20 +2,42 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Product from 'components/Product/Product';
 import API from 'config';
-import { basicApi } from 'lib/api';
+import { basicApi, authApi } from 'lib/api';
 
 const ProductsList = ({ type }) => {
   const [products, setProducts] = useState([]);
 
+  const [bookmarks, setBookmarks] = useState([]);
+
+  const token = localStorage.getItem('token');
+
+  const newProducts = products.map(product => ({
+    ...product,
+    isBookmarked: bookmarks.some(mark => product.productId === mark.productId),
+  }));
+
   useEffect(() => {
     (async () => {
       try {
-        const res = await basicApi.get(API.mainFrip);
-        const data = await res.data;
+        if (!token) {
+          const res = await basicApi.get(API.mainFrip);
+          const data = await res.data;
 
-        type === '신규 프립'
-          ? setProducts(JSON.parse(data.data[0].products))
-          : setProducts(JSON.parse(data.data[1].products));
+          type === '신규 프립'
+            ? setProducts(JSON.parse(data.data[0].products))
+            : setProducts(JSON.parse(data.data[1].products));
+        } else {
+          const res = await authApi.get(API.mainFrip);
+          const data = await res.data;
+
+          type === '신규 프립'
+            ? setProducts(JSON.parse(data.data[0].products))
+            : setProducts(JSON.parse(data.data[1].products));
+
+          JSON.parse(data.data[0].wishlists) === null
+            ? setBookmarks([])
+            : setBookmarks(JSON.parse(data.data[1].wishlists));
+        }
       } catch (err) {
         alert(err);
       }
@@ -31,9 +53,14 @@ const ProductsList = ({ type }) => {
         <ProductSeeAll>전체 보기</ProductSeeAll>
       </ProductTitleBox>
       <ProductListBox>
-        {products &&
-          products.map(products => (
-            <Product key={products.productId} product={products} />
+        {newProducts &&
+          newProducts.map(products => (
+            <Product
+              key={products.productId}
+              product={products}
+              bookmarks={bookmarks}
+              setBookmarks={setBookmarks}
+            />
           ))}
       </ProductListBox>
     </ProductsListContainer>

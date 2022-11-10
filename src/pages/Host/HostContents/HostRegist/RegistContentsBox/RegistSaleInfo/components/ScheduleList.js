@@ -5,7 +5,6 @@ import ScheduleWrapper from './ScheduleWrapper';
 const ScheduleList = ({ formData, setFormData }) => {
   const { schedules } = formData;
 
-  console.log(formData);
   const [countList, setCountList] = useState([
     {
       content: '',
